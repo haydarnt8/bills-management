@@ -45,7 +45,6 @@ const filters = ref({
 })
 
 function handleDelete(id: string) {
-  console.log('handleDelete', id)
   itemIdToDelete.value = id
   showDeleteDialog.value = true
 }
@@ -61,8 +60,6 @@ function handleFormDone() {
 }
 
 async function getBills() {
-  console.log('getBills')
-
   loading.value = true
   baseService
     .get('api/bills', {

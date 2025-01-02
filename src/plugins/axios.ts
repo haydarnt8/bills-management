@@ -22,107 +22,190 @@ mock.onPost('/api/login').reply((config) => {
   return [401, { message: 'Invalid credentials' }]
 })
 
-mock.onGet('/api/bills').reply((config) => {
-  const bills = JSON.parse(localStorage.getItem(STORAGE_KEY))
-
-  const {
-    page = 1,
-    perPage = 10,
-    paidStatus,
-    billStatus,
-    receivingStation,
-    issuingDateStart,
-    issuingDateEnd,
-    executionDateStart,
-    executionDateEnd,
-  } = config.params
-
-  // Apply filters
-  let filteredBills = bills.filter((bill) => {
-    const matchPaidStatus = !paidStatus || bill.paidStatus === paidStatus
-    const matchBillStatus = !billStatus || bill.billStatus === billStatus
-    const matchStation = !receivingStation || bill.receivingStation === receivingStation
-
-    const issuingDate = new Date(bill.issuingDate)
-    const executionDate = new Date(bill.executionDate)
-
-    const matchIssuingDate =
-      (!issuingDateStart || issuingDate >= new Date(issuingDateStart)) &&
-      (!issuingDateEnd || issuingDate <= new Date(issuingDateEnd))
-
-    const matchExecutionDate =
-      (!executionDateStart || executionDate >= new Date(executionDateStart)) &&
-      (!executionDateEnd || executionDate <= new Date(executionDateEnd))
-
-    return (
-      matchPaidStatus && matchBillStatus && matchStation && matchIssuingDate && matchExecutionDate
-    )
-  })
-
-  const start = (page - 1) * perPage
-  const paginatedBills = filteredBills.slice(start, start + perPage)
-
-  const response = {
-    items: paginatedBills,
-    totalCount: filteredBills.length,
-    totalPaidAmount: filteredBills.reduce(
-      (sum, bill) => (bill.paidStatus === 'paid' ? sum + Number(bill.amount) : sum),
-      0,
-    ),
-    totalUnpaidAmount: filteredBills.reduce(
-      (sum, bill) => (bill.paidStatus === 'unpaid' ? sum + Number(bill.amount) : sum),
-      0,
-    ),
-    executedCount: filteredBills.filter((bill) => bill.billStatus === 'executed').length,
-    pendingCount: filteredBills.filter((bill) => bill.billStatus === 'pending').length,
+// Helper function to safely parse JSON with error handling
+const safeJsonParse = (data, fallback = []) => {
+  try {
+    return JSON.parse(data) || fallback
+  } catch (error) {
+    console.error('Error parsing JSON:', error)
+    return fallback
   }
+}
 
-  return [200, response]
+// Helper function to safely handle date comparisons
+const isDateInRange = (dateStr, startDate, endDate) => {
+  if (!dateStr) return true
+
+  const date = new Date(dateStr)
+  if (isNaN(date.getTime())) return false
+
+  if (startDate && new Date(startDate) > date) return false
+  if (endDate && new Date(endDate) < date) return false
+
+  return true
+}
+
+mock.onGet('/api/bills').reply((config) => {
+  try {
+    const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
+
+    const {
+      page = 1,
+      perPage = 10,
+      paidStatus,
+      billStatus,
+      receivingStation,
+      issuingDateStart,
+      issuingDateEnd,
+      executionDateStart,
+      executionDateEnd,
+    } = config.params || {} // Add fallback for config.params
+
+    // Validate pagination parameters
+    const validPage = Math.max(1, parseInt(page) || 1)
+    const validPerPage = Math.max(1, Math.min(100, parseInt(perPage) || 10))
+
+    // Apply filters with null checks
+    const filteredBills = bills.filter((bill) => {
+      if (!bill) return false // Skip invalid bills
+
+      const matchPaidStatus = !paidStatus || bill.paidStatus === paidStatus
+      const matchBillStatus = !billStatus || bill.billStatus === billStatus
+      const matchStation = !receivingStation || bill.receivingStation === receivingStation
+
+      const matchIssuingDate = isDateInRange(bill.issuingDate, issuingDateStart, issuingDateEnd)
+
+      const matchExecutionDate = isDateInRange(
+        bill.executionDate,
+        executionDateStart,
+        executionDateEnd,
+      )
+
+      return (
+        matchPaidStatus && matchBillStatus && matchStation && matchIssuingDate && matchExecutionDate
+      )
+    })
+
+    // Calculate pagination
+    const start = (validPage - 1) * validPerPage
+    const paginatedBills = filteredBills.slice(start, start + validPerPage)
+
+    // Calculate totals with safe number conversion
+    const response = {
+      items: paginatedBills,
+      totalCount: bills.length,
+      totalPaidAmount: bills.reduce(
+        (sum, bill) => (bill.paidStatus === 'paid' ? sum + (Number(bill.amount) || 0) : sum),
+        0,
+      ),
+      totalUnpaidAmount: bills.reduce(
+        (sum, bill) => (bill.paidStatus === 'unpaid' ? sum + (Number(bill.amount) || 0) : sum),
+        0,
+      ),
+      executedCount: bills.filter((bill) => bill.billStatus === 'executed').length,
+      pendingCount: bills.filter((bill) => bill.billStatus === 'pending').length,
+      currentPage: validPage,
+      totalPages: Math.ceil(bills.length / validPerPage),
+    }
+
+    return [200, response]
+  } catch (error) {
+    console.error('Error in GET /api/bills:', error)
+    return [500, { error: 'Internal server error' }]
+  }
 })
 
-// add get bill by id
-
 mock.onGet(/\/api\/bills\/\d+/).reply((config) => {
-  const bills = JSON.parse(localStorage.getItem(STORAGE_KEY))
-  const id = parseInt(config.url.split('/').pop())
-  const bill = bills.find((bill) => bill.id === id)
-  if (bill) return [200, bill]
-  return [404]
+  try {
+    const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
+    const id = parseInt(config.url.split('/').pop())
+
+    if (isNaN(id)) {
+      return [400, { error: 'Invalid ID format' }]
+    }
+
+    const bill = bills.find((bill) => bill && bill.id === id)
+    return bill ? [200, bill] : [404, { error: 'Bill not found' }]
+  } catch (error) {
+    console.error('Error in GET /api/bills/:id:', error)
+    return [500, { error: 'Internal server error' }]
+  }
 })
 
 mock.onPost('/api/bills').reply((config) => {
-  const bills = JSON.parse(localStorage.getItem(STORAGE_KEY))
-  const newBill = { ...JSON.parse(config.data), id: bills.length + 1 }
-  bills.push(newBill)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(bills))
-  return [201, newBill]
+  try {
+    const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
+    const billData = safeJsonParse(config.data)
+
+    if (!billData) {
+      return [400, { error: 'Invalid bill data' }]
+    }
+
+    // Generate a unique ID
+    const maxId = bills.reduce((max, bill) => Math.max(max, bill?.id || 0), 0)
+    const newBill = { ...billData, id: maxId + 1 }
+
+    bills.push(newBill)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(bills))
+
+    return [201, newBill]
+  } catch (error) {
+    console.error('Error in POST /api/bills:', error)
+    return [500, { error: 'Internal server error' }]
+  }
 })
 
 mock.onPut(/\/api\/bills\/\d+/).reply((config) => {
-  const bills = JSON.parse(localStorage.getItem(STORAGE_KEY))
-  const id = parseInt(config.url.split('/').pop())
-  const updatedBill = JSON.parse(config.data)
-  const index = bills.findIndex((bill) => bill.id === id)
+  try {
+    const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
+    const id = parseInt(config.url.split('/').pop())
 
-  if (index !== -1) {
+    if (isNaN(id)) {
+      return [400, { error: 'Invalid ID format' }]
+    }
+
+    const updatedBill = safeJsonParse(config.data)
+    if (!updatedBill) {
+      return [400, { error: 'Invalid bill data' }]
+    }
+
+    const index = bills.findIndex((bill) => bill && bill.id === id)
+    if (index === -1) {
+      return [404, { error: 'Bill not found' }]
+    }
+
     bills[index] = { ...updatedBill, id }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(bills))
+
     return [200, bills[index]]
+  } catch (error) {
+    console.error('Error in PUT /api/bills/:id:', error)
+    return [500, { error: 'Internal server error' }]
   }
-  return [404]
 })
 
 mock.onDelete(/\/api\/bills\/\d+/).reply((config) => {
-  const bills = JSON.parse(localStorage.getItem(STORAGE_KEY))
-  const id = parseInt(config.url.split('/').pop())
-  const index = bills.findIndex((bill) => bill.id === id)
+  try {
+    const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
+    const id = parseInt(config.url.split('/').pop())
 
-  if (index !== -1) {
+    if (isNaN(id)) {
+      return [400, { error: 'Invalid ID format' }]
+    }
+
+    const index = bills.findIndex((bill) => bill && bill.id === id)
+    if (index === -1) {
+      return [404, { error: 'Bill not found' }]
+    }
+
     bills.splice(index, 1)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(bills))
-    return [200]
+
+    return [200, { message: 'Bill deleted successfully' }]
+  } catch (error) {
+    console.error('Error in DELETE /api/bills/:id:', error)
+    return [500, { error: 'Internal server error' }]
   }
-  return [404]
 })
 
 axiosIns.interceptors.request.use(onEachRequest, onEachRequestRejected)

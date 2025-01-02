@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<Props>(), {
         >
           <td class="whitespace-nowrap">{{ item.billNumber }}</td>
           <td>{{ item.receiver }}</td>
-          <td>{{ item.amount }}</td>
+          <td>{{ Number(item.amount).toLocaleString() }}</td>
           <td>{{ item.paidStatus }}</td>
           <td>{{ item.issuingDate }}</td>
           <td>{{ item.executionDate }}</td>

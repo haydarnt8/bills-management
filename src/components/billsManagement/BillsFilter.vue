@@ -1,15 +1,5 @@
 <script lang="ts" setup>
 const model = defineModel()
-
-// const filters = ref({
-//   paidStatus: '',
-//   billStatus: '',
-//   receivingStation: '',
-//   issuingDateStart: '',
-//   issuingDateEnd: '',
-//   executionDateStart: '',
-//   executionDateEnd: '',
-// })
 </script>
 
 <template>

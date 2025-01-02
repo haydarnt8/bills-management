@@ -46,18 +46,11 @@ import { ref } from 'vue'
 interface Props {
   title: string
 }
-// Props
 const props = defineProps<Props>()
-
-// State
 const isOpen = ref(false)
-
-// Methods
 const toggleAccordion = () => {
   isOpen.value = !isOpen.value
 }
-
-// Animation hooks
 const beforeEnter = (el: HTMLElement) => {
   el.style.height = '0px'
 }

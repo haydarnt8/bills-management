@@ -27,13 +27,6 @@ const pagination = ref({
   maxVisiblePages: 4,
 })
 
-// paidStatus,
-//     billStatus,
-//     receivingStation,
-//     issuingDateStart,
-//     issuingDateEnd,
-//     executionDateStart,
-//     executionDateEnd,
 const filters = ref({
   paidStatus: '',
   billStatus: '',

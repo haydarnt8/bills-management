@@ -12,6 +12,6 @@ export const AuthStorageUtils = {
   },
   logout: () => {
     localStorage.clear()
-    router.push({ name: 'login' })
+    router.push('/login')
   },
 }

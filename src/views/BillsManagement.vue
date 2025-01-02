@@ -23,7 +23,7 @@ const loading = ref(false)
 const pagination = ref({
   currentPage: 1,
   totalItems: 0,
-  itemsPerPage: 1,
+  itemsPerPage: 20,
   maxVisiblePages: 0,
 })
 
@@ -105,6 +105,15 @@ watch(
   () => pagination.value.currentPage,
   (v) => {
     getBills()
+  },
+)
+
+watch(
+  () => showFormDrawer.value,
+  (v) => {
+    if (!v) {
+      itemIdToEdit.value = null
+    }
   },
 )
 </script>

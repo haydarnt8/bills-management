@@ -59,7 +59,7 @@ const handlePageChange = (page: number) => {
     class="flex flex-col md:flex-row justify-between items-start md:items-center m-auto md:m-0 space-y-3 md:space-y-0 p-4"
     aria-label="Table navigation"
   >
-    <span class="text-sm font-normal text-gray-500">
+    <span class="w-full md:text-start text-center text-sm font-normal text-gray-500">
       Showing
       <span class="font-semibold text-gray-900">{{ startItem }}-{{ endItem }}</span>
       of

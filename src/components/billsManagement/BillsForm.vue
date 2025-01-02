@@ -15,14 +15,14 @@ const isLoading = ref(false)
 const getItemLoading = ref(false)
 
 const schema = yup.object({
-  billNumber: yup.string().required(),
-  receiver: yup.string().required(),
-  amount: yup.string().required(),
-  paidStatus: yup.string().required(),
-  billStatus: yup.string().required(),
-  issuingDate: yup.string().required(),
-  executionDate: yup.string().required(),
-  receivingStation: yup.string().required(),
+  billNumber: yup.string().required('Bill number is required'),
+  receiver: yup.string().required('Receiver is required'),
+  amount: yup.number().typeError('Amount must be a valid number').required('Amount is required'),
+  paidStatus: yup.string().required('Paid status is required'),
+  billStatus: yup.string().required('Bill status is required'),
+  issuingDate: yup.string().required('Issuing date is required'),
+  executionDate: yup.string().required('Execution date is required'),
+  receivingStation: yup.string().required('Receiving station is required'),
 })
 
 const form = ref({
@@ -49,7 +49,6 @@ const handleEditItem = (res) => {
 }
 
 const getBill = async () => {
-  console.log('getBill')
   getItemLoading.value = true
   await baseService
     .get(`/api/bills/${props.id}`)
@@ -61,17 +60,14 @@ const getBill = async () => {
     })
 }
 
-const handleSub = async (v) => {
-  console.log('handleSub', v)
+const handleSub = async () => {
   const endpoint = props.id ? `/api/bills/${props.id}` : 'api/bills'
   isLoading.value = true
   await baseService[props.id ? 'update' : 'create'](endpoint, form.value)
     .then((res) => {
-      console.log(res)
       emit('done')
     })
     .finally(() => {
-      console.log('finally')
       isLoading.value = false
     })
 }
@@ -164,7 +160,7 @@ watch(
             required
             :options="[
               { value: 'pending', label: 'Pending' },
-              { value: 'completed', label: 'Completed' },
+              { value: 'executed', label: 'Executed' },
             ]"
           />
         </div>

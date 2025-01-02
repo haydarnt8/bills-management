@@ -36,7 +36,7 @@ const model = defineModel()
           required
           :options="[
             { value: 'pending', label: 'Pending' },
-            { value: 'completed', label: 'Completed' },
+            { value: 'executed', label: 'Executed' },
           ]"
         />
       </div>

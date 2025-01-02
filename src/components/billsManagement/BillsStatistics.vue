@@ -45,11 +45,11 @@ const { totalItems, statistics } = toRefs(props)
     <div class="flex-1 flex gap-4 flex-wrap">
       <div class="flex md:items-center min-w-fit gap-1 break-words">
         <span>Paid Amount:</span>
-        <b>{{ statistics.totalPaidAmount }}</b>
+        <b>{{ Number(statistics.totalPaidAmount).toLocaleString() }}</b>
       </div>
       <div class="flex md:items-center min-w-fit gap-1 break-words">
         <span>Unpaid Amount:</span>
-        <b>{{ statistics.totalUnpaidAmount }}</b>
+        <b>{{ Number(statistics.totalUnpaidAmount).toLocaleString() }}</b>
       </div>
       <div class="flex md:items-center min-w-fit gap-1 break-words">
         <span>Total Bills:</span>

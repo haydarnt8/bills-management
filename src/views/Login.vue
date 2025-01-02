@@ -18,17 +18,14 @@ const credentials = ref({
 })
 
 const handleLogin = async (v) => {
-  console.log('handleLogin', v)
   isLoading.value = true
   await baseService
     .create('api/login', credentials.value)
     .then((res) => {
-      console.log(res?.token)
       AuthStorageUtils.saveAccessTokenToLocalStorage(res?.token)
       router.push('/')
     })
     .finally(() => {
-      console.log('finally')
       isLoading.value = false
     })
 }

@@ -7,8 +7,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BaseConfirmDialog: typeof import('./src/components/base/BaseConfirmDialog.vue')['default']
     BaseDeleteDailod: typeof import('./src/components/base/BaseDeleteDialog.vue')['default']
     BaseDeleteDialog: typeof import('./src/components/base/BaseDeleteDialog.vue')['default']
+    BaseDialog: typeof import('./src/components/base/BaseDialog.vue')['default']
     BaseDrawer: typeof import('./src/components/base/BaseDrawer.vue')['default']
     BaseExpandPanel: typeof import('./src/components/base/BaseExpandPanel.vue')['default']
     BaseFormSkeleton: typeof import('./src/components/share/BaseFormSkeleton.vue')['default']
@@ -20,8 +22,10 @@ declare module 'vue' {
     BaseToast: typeof import('./src/components/base/BaseToast.vue')['default']
     BillsFilter: typeof import('./src/components/billsManagement/BillsFilter.vue')['default']
     BillsForm: typeof import('./src/components/billsManagement/BillsForm.vue')['default']
+    BillsHeader: typeof import('./src/components/billsManagement/BillsHeader.vue')['default']
     BillsStatistics: typeof import('./src/components/billsManagement/BillsStatistics.vue')['default']
     BillsTable: typeof import('./src/components/billsManagement/BillsTable.vue')['default']
+    BillsView: typeof import('./src/components/billsManagement/BillsView.vue')['default']
     DropdownButton: typeof import('./src/components/base/DropdownButton.vue')['default']
     DrowpDownButton: typeof import('./src/components/base/DrowpDownButton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

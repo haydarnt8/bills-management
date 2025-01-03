@@ -33,7 +33,11 @@ const safeJsonParse = (data, fallback = []) => {
 }
 
 // Helper function to safely handle date comparisons
-const isDateInRange = (dateStr, startDate, endDate) => {
+const isDateInRange = (
+  dateStr: string | null,
+  startDate: string | null,
+  endDate: string | null,
+): boolean => {
   if (!dateStr) return true
 
   const date = new Date(dateStr)

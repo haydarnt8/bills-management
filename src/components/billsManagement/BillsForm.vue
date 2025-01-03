@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { Form, useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { Field } from 'vee-validate'
+import type { Bills } from '@/models/bills'
 
 interface Props {
   id?: string | null
@@ -25,7 +26,7 @@ const schema = yup.object({
   receivingStation: yup.string().required('Receiving station is required'),
 })
 
-const form = ref({
+const form = ref<Bills>({
   billNumber: '',
   receiver: '',
   amount: '',
@@ -36,7 +37,7 @@ const form = ref({
   receivingStation: '',
 })
 
-const handleEditItem = (res) => {
+const handleEditItem = (res: Bills) => {
   if (!res) return
   form.value.billNumber = res.billNumber
   form.value.receiver = res.receiver
@@ -52,8 +53,8 @@ const getBill = async () => {
   getItemLoading.value = true
   await baseService
     .get(`/api/bills/${props.id}`)
-    .then((res) => {
-      handleEditItem(res)
+    .then((res: object | null) => {
+      if (res) handleEditItem(res as Bills)
     })
     .finally(() => {
       getItemLoading.value = false
@@ -64,7 +65,7 @@ const handleSub = async () => {
   const endpoint = props.id ? `/api/bills/${props.id}` : 'api/bills'
   isLoading.value = true
   await baseService[props.id ? 'update' : 'create'](endpoint, form.value)
-    .then((res) => {
+    .then(() => {
       emit('done')
     })
     .finally(() => {

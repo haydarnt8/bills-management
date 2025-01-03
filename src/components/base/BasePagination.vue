@@ -1,14 +1,8 @@
 <script lang="ts" setup>
+import type { Pagination } from '@/models/share'
 import { computed } from 'vue'
 
-interface Props {
-  currentPage: number
-  totalItems: number
-  itemsPerPage: number
-  maxVisiblePages?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Pagination>(), {
   maxVisiblePages: 5,
 })
 

@@ -1,17 +1,19 @@
 <script lang="ts" setup>
+import type { Bills } from '@/models/bills'
+
 interface Props {
-  items: any[]
+  items: Bills[] | []
   loading: boolean
 }
 interface Emit {
-  (event: 'edit', id: string): void
-  (event: 'delete', id: string): void
-  (event: 'view', id: string): void
+  (event: 'edit', id: string | undefined): void
+  (event: 'delete', id: string | undefined): void
+  (event: 'view', id: string | undefined): void
 }
 
 const emit = defineEmits<Emit>()
 const props = withDefaults(defineProps<Props>(), {
-  items: [],
+  items: () => [],
 })
 </script>
 
@@ -39,7 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
           v-else
           v-for="(item, i) in props.items"
           :key="i"
-          :class="[{ 'border-b': i !== 39 }]"
+          :class="[{ 'border-b': i !== props.items.length - 1 }]"
           class="[&>td]:px-4 [&>td]:py-3 hover:bg-gray-100 cursor-pointer"
           @click="emit('view', item.id)"
         >

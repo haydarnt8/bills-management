@@ -1,5 +1,17 @@
 <script lang="ts" setup>
-const model = defineModel()
+import type { BillsFilterType } from '@/models/bills'
+
+const model = defineModel<BillsFilterType>({
+  default: {
+    paidStatus: '',
+    billStatus: '',
+    receivingStation: '',
+    issuingDateStart: '',
+    issuingDateEnd: '',
+    executionDateStart: '',
+    executionDateEnd: '',
+  },
+})
 </script>
 
 <template>

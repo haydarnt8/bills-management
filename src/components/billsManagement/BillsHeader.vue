@@ -1,13 +1,7 @@
 <script lang="ts" setup>
+import type { Statistics } from '@/models/bills'
 import { AuthStorageUtils } from '@/utils/auth/auth-storage-utils'
 import { useRouter } from 'vue-router'
-
-interface Statistics {
-  totalPaidAmount: number
-  totalUnpaidAmount: number
-  executed: number
-  pending: number
-}
 
 interface Props {
   totalItems: string | number

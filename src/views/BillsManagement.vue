@@ -6,6 +6,8 @@ import DropdownButton from '@/components/base/DropdownButton.vue'
 import BillsFilter from '@/components/billsManagement/BillsFilter.vue'
 import BillsForm from '@/components/billsManagement/BillsForm.vue'
 import BillsTable from '@/components/billsManagement/BillsTable.vue'
+import type { BillsFilterType } from '@/models/bills'
+import type { Pagination } from '@/models/share'
 
 const items = ref([])
 const statistics = reactive({
@@ -22,14 +24,14 @@ const showFormDrawer = ref(false)
 const showViewDrawer = ref(false)
 const loading = ref(false)
 
-const pagination = ref({
+const pagination = ref<Pagination>({
   currentPage: 1,
   totalItems: 0,
   itemsPerPage: 15,
   maxVisiblePages: 4,
 })
 
-const filters = ref({
+const filters = ref<BillsFilterType>({
   paidStatus: '',
   billStatus: '',
   receivingStation: '',
@@ -39,18 +41,24 @@ const filters = ref({
   executionDateEnd: '',
 })
 
-function handleDelete(id: string) {
+function handleDelete(id: string | undefined | null) {
+  if (!id) return
+
   itemIdToDelete.value = id
   showDeleteDialog.value = true
 }
 
-function handleEdit(id: string) {
+function handleEdit(id: string | undefined | null) {
+  if (!id) return
+
   itemIdToEdit.value = id
   showViewDrawer.value = false
   showFormDrawer.value = true
 }
 
-function handleView(id: string) {
+function handleView(id: string | undefined | null) {
+  if (!id) return
+
   itemIdToView.value = id
   showViewDrawer.value = true
 }

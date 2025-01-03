@@ -1,12 +1,12 @@
 <script setup lang="ts">
 interface Props {
   label: string
-  items: { label: string; value: string }[]
+  items: { label: string; value: string }[] | []
 }
 
 const model = defineModel()
 const props = withDefaults(defineProps<Props>(), {
-  items: [],
+  items: () => [],
 })
 
 const isOpen = ref(false)

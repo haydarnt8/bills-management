@@ -1,19 +1,21 @@
 <script lang="ts" setup>
+import type { Bills } from '@/models/bills'
+
 interface Props {
   id: string | null
 }
 
 interface Emit {
-  (event: 'edit', id: string): void
+  (event: 'edit', id: string | null): void
 }
 const props = defineProps<Props>()
 const emit = defineEmits<Emit>()
 const isLoading = ref(false)
-const item = reactive({
+const item = reactive<Bills>({
   id: '',
   billNumber: '',
   receiver: '',
-  amount: 0,
+  amount: '',
   paidStatus: '',
   billStatus: '',
   issuingDate: '',

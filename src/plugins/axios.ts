@@ -56,6 +56,7 @@ mock.onGet('/api/bills').reply((config) => {
     const {
       page = 1,
       perPage = 10,
+      billNumber,
       paidStatus,
       billStatus,
       receivingStation,
@@ -63,17 +64,19 @@ mock.onGet('/api/bills').reply((config) => {
       issuingDateEnd,
       executionDateStart,
       executionDateEnd,
-    } = config.params || {} // Add fallback for config.params
+    } = config.params || {}
 
     // Validate pagination parameters
     const validPage = Math.max(1, parseInt(page) || 1)
     const validPerPage = Math.max(1, Math.min(100, parseInt(perPage) || 10))
 
     // Apply filters with null checks
-    // Apply filters with null checks
     const filteredBills = bills.filter((bill) => {
       if (!bill) return false // Skip invalid bills
 
+      const matchBillNumber =
+        !billNumber ||
+        (bill.billNumber && bill.billNumber.toLowerCase().includes(billNumber.toLowerCase()))
       const matchPaidStatus = !paidStatus || bill.paidStatus === paidStatus
       const matchBillStatus = !billStatus || bill.billStatus === billStatus
       const matchStation =
@@ -89,7 +92,12 @@ mock.onGet('/api/bills').reply((config) => {
       )
 
       return (
-        matchPaidStatus && matchBillStatus && matchStation && matchIssuingDate && matchExecutionDate
+        matchBillNumber &&
+        matchPaidStatus &&
+        matchBillStatus &&
+        matchStation &&
+        matchIssuingDate &&
+        matchExecutionDate
       )
     })
 

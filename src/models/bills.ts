@@ -24,6 +24,7 @@ export interface Statistics {
 }
 
 export interface BillsFilterType {
+  billNumber: string
   paidStatus: string
   billStatus: string
   receivingStation: string

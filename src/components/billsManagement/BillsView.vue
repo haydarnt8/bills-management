@@ -61,7 +61,7 @@ watch(
       <div class="flex justify-between items-center">
         <h2 class="text-2xl font-bold text-gray-800">Bill Details</h2>
         <button
-          @click="emit('edit', item.id)"
+          @click="emit('edit', props.id)"
           class="flex items-center justify-center p-2 text-white bg-orange-500 rounded-full shadow-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white"
         >
           <svg
@@ -91,20 +91,22 @@ watch(
 
     <div class="grid grid-cols-1 gap-4">
       <div class="space-y-2 col-span-1">
-        <div class="flex justify-between">
+        <div class="flex gap-1 justify-between">
           <span class="text-gray-600">Receiver:</span>
           <span v-if="isLoading" class="animate-pulse h-5 bg-gray-200 rounded w-20"></span>
-          <span v-else class="font-medium break-words">{{ item.receiver }}</span>
+          <span v-else class="font-medium break-all">{{ item.receiver }}</span>
         </div>
-        <div class="flex justify-between">
+        <div class="flex gap-1 justify-between">
           <span class="text-gray-600">Amount:</span>
           <span v-if="isLoading" class="animate-pulse h-5 bg-gray-200 rounded w-20"></span>
-          <span v-else class="font-medium">{{ Number(item.amount).toLocaleString() }}</span>
+          <span v-else class="font-medium break-all">{{
+            Number(item.amount).toLocaleString()
+          }}</span>
         </div>
-        <div class="flex justify-between">
+        <div class="flex gap-1 justify-between">
           <span class="text-gray-600">Receiving Station:</span>
           <span v-if="isLoading" class="animate-pulse h-5 bg-gray-200 rounded w-20"></span>
-          <span v-else class="font-medium">{{ item.receivingStation }}</span>
+          <span v-else class="font-medium break-all">{{ item.receivingStation }}</span>
         </div>
       </div>
 

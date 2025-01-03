@@ -148,6 +148,7 @@ mock.onGet(/\/api\/bills\/\d+/).reply((config) => {
 })
 
 mock.onPost('/api/bills').reply((config) => {
+  const toastStore = useToastStore()
   try {
     const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
     const billData = safeJsonParse(config.data)
@@ -163,6 +164,10 @@ mock.onPost('/api/bills').reply((config) => {
     bills.push(newBill)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(bills))
 
+    toastStore.addToast({
+      message: 'Bill created successfully',
+      type: 'success',
+    })
     return [201, newBill]
   } catch (error) {
     console.error('Error in POST /api/bills:', error)
@@ -171,6 +176,7 @@ mock.onPost('/api/bills').reply((config) => {
 })
 
 mock.onPut(/\/api\/bills\/\d+/).reply((config) => {
+  const toastStore = useToastStore()
   try {
     const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
     const id = parseInt(config.url.split('/').pop())
@@ -191,6 +197,11 @@ mock.onPut(/\/api\/bills\/\d+/).reply((config) => {
 
     bills[index] = { ...updatedBill, id }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(bills))
+
+    toastStore.addToast({
+      message: 'Bill updated successfully',
+      type: 'success',
+    })
 
     return [200, bills[index]]
   } catch (error) {

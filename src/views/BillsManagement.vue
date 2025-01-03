@@ -16,8 +16,10 @@ const statistics = reactive({
 })
 const itemIdToDelete = ref<string | null>(null)
 const itemIdToEdit = ref<string | null>(null)
+const itemIdToView = ref<string | null>(null)
 const showDeleteDialog = ref(false)
 const showFormDrawer = ref(false)
+const showViewDrawer = ref(false)
 const loading = ref(false)
 
 const pagination = ref({
@@ -44,7 +46,13 @@ function handleDelete(id: string) {
 
 function handleEdit(id: string) {
   itemIdToEdit.value = id
+  showViewDrawer.value = false
   showFormDrawer.value = true
+}
+
+function handleView(id: string) {
+  itemIdToView.value = id
+  showViewDrawer.value = true
 }
 
 function handleFormDone() {
@@ -120,7 +128,13 @@ watch(
         <BillsFilter v-model="filters" />
       </BaseExpandPanel>
     </div>
-    <BillsTable :loading="loading" :items="items" @delete="handleDelete" @edit="handleEdit" />
+    <BillsTable
+      :loading="loading"
+      :items="items"
+      @delete="handleDelete"
+      @edit="handleEdit"
+      @view="handleView"
+    />
     <BasePagination
       v-model:currentPage="pagination.currentPage"
       :totalItems="pagination.totalItems"
@@ -135,5 +149,8 @@ watch(
     <BaseDrawer v-model="showFormDrawer" :title="itemIdToEdit ? 'Edit Bill' : 'Add Bill'">
       <BillsForm :id="itemIdToEdit" @done="handleFormDone" />
     </BaseDrawer>
+    <BaseDialog v-model="showViewDrawer">
+      <BillsView :id="itemIdToView" @edit="handleEdit" />
+    </BaseDialog>
   </div>
 </template>

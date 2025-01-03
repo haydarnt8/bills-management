@@ -69,8 +69,6 @@ const getBill = async () => {
   await baseService
     .get(`/api/bills/${props.id}`)
     .then((res: object | null) => {
-      console.log(res)
-
       if (res) handleEditItem(res as Bills)
     })
     .finally(() => {

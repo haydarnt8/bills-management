@@ -8,10 +8,10 @@ export interface Bills {
   issuingDate: string
   executionDate: string
   receivingStation: string
-  transactions: Transactions[] | []
+  transactions: Transaction[] | []
 }
 
-export interface Transactions {
+export interface Transaction {
   amount: string
   paymentDate: string
 }

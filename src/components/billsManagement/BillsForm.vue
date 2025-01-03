@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { Form, useForm } from 'vee-validate'
 import * as yup from 'yup'
 import { Field } from 'vee-validate'
-import type { Bills } from '@/models/bills'
+import type { Bills, Transaction } from '@/models/bills'
 
 interface Props {
   id?: string | null
@@ -46,7 +46,7 @@ const form = ref<Bills>({
   transactions: [],
 })
 
-const transactionForm = ref({
+const transactionForm = ref<Transaction>({
   amount: '',
   paymentDate: '',
 })

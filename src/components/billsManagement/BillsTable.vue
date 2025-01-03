@@ -6,6 +6,7 @@ interface Props {
 interface Emit {
   (event: 'edit', id: string): void
   (event: 'delete', id: string): void
+  (event: 'view', id: string): void
 }
 
 const emit = defineEmits<Emit>()
@@ -39,17 +40,18 @@ const props = withDefaults(defineProps<Props>(), {
           v-for="(item, i) in props.items"
           :key="i"
           :class="[{ 'border-b': i !== 39 }]"
-          class="[&>td]:px-4 [&>td]:py-3"
+          class="[&>td]:px-4 [&>td]:py-3 hover:bg-gray-100 cursor-pointer"
+          @click="emit('view', item.id)"
         >
-          <td class="whitespace-nowrap">{{ item.billNumber }}</td>
-          <td>{{ item.receiver }}</td>
-          <td>{{ Number(item.amount).toLocaleString() }}</td>
-          <td>{{ item.paidStatus }}</td>
-          <td>{{ item.issuingDate }}</td>
-          <td>{{ item.executionDate }}</td>
-          <td>{{ item.receivingStation }}</td>
+          <td class="truncate max-w-36">{{ item.billNumber }}</td>
+          <td class="truncate max-w-36">{{ item.receiver }}</td>
+          <td class="truncate max-w-36">{{ Number(item.amount).toLocaleString() }}</td>
+          <td class="truncate max-w-36">{{ item.paidStatus }}</td>
+          <td class="truncate max-w-36">{{ item.issuingDate }}</td>
+          <td class="truncate max-w-36">{{ item.executionDate }}</td>
+          <td class="truncate max-w-36">{{ item.receivingStation }}</td>
           <td class="flex items-center gap-4">
-            <span class="cursor-pointer" @click="emit('edit', item.id)">
+            <span class="cursor-pointer" @click.stop="emit('edit', item.id)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -65,7 +67,7 @@ const props = withDefaults(defineProps<Props>(), {
                 />
               </svg>
             </span>
-            <span class="cursor-pointer" @click="emit('delete', item.id)">
+            <span class="cursor-pointer" @click.stop="emit('delete', item.id)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

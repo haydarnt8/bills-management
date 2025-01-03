@@ -118,7 +118,7 @@ watch(
 
 <template>
   <div class="size-full flex flex-col bg-white relative shadow-md sm:rounded-lg overflow-hidden">
-    <BillsStatistics
+    <BillsHeader
       @add="showFormDrawer = true"
       :totalItems="pagination.totalItems"
       :statistics="statistics"

@@ -8,6 +8,12 @@ export interface Bills {
   issuingDate: string
   executionDate: string
   receivingStation: string
+  transactions: Transactions[] | []
+}
+
+export interface Transactions {
+  amount: string
+  paymentDate: string
 }
 
 export interface Statistics {

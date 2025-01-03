@@ -21,6 +21,7 @@ const item = reactive<Bills>({
   issuingDate: '',
   executionDate: '',
   receivingStation: '',
+  transactions: [],
 })
 
 const getBill = async () => {
@@ -37,6 +38,7 @@ const getBill = async () => {
       item.issuingDate = res.issuingDate
       item.executionDate = res.executionDate
       item.receivingStation = res.receivingStation
+      item.transactions = res.transactions
     })
     .finally(() => {
       isLoading.value = false
@@ -58,7 +60,7 @@ watch(
 </script>
 
 <template>
-  <div class="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 overflow-ellipsis">
+  <div class="max-w-2xl mx-auto max-h-[80vh] bg-white rounded-lg shadow p-6 overflow-auto">
     <div class="mb-6">
       <div class="flex justify-between items-center">
         <h2 class="text-2xl font-bold text-gray-800">Bill Details</h2>
@@ -146,6 +148,68 @@ watch(
             <span class="text-gray-600">Execution Date:</span>
             <span v-if="isLoading" class="animate-pulse h-5 bg-gray-200 rounded w-20"></span>
             <span v-else class="font-medium">{{ item.executionDate }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 border-t border-gray-200 pt-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold text-gray-800">Transaction History</h3>
+          <span class="text-sm text-gray-500">{{ item.transactions.length }} entries</span>
+        </div>
+
+        <div v-if="isLoading" class="space-y-3">
+          <div
+            v-for="n in 3"
+            :key="n"
+            class="animate-pulse flex justify-between p-4 bg-gray-50 rounded-lg"
+          >
+            <div class="h-5 bg-gray-200 rounded w-24"></div>
+            <div class="h-5 bg-gray-200 rounded w-32"></div>
+          </div>
+        </div>
+
+        <div
+          v-else-if="item.transactions.length === 0"
+          class="flex flex-col items-center justify-center py-8 text-gray-500"
+        >
+          <svg
+            class="w-12 h-12 mb-3 text-gray-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            />
+          </svg>
+          <p class="text-sm">No transactions recorded yet</p>
+        </div>
+
+        <div v-else class="space-y-2">
+          <div
+            v-for="transaction in item.transactions"
+            :key="transaction.paymentDate"
+            class="flex justify-between items-center p-4 bg-gray-50 rounded-lg transition-colors duration-200 hover:bg-gray-100"
+          >
+            <div class="flex items-center space-x-3">
+              <div class="flex-shrink-0 w-2 h-2 bg-green-500 rounded-full"></div>
+              <span class="font-medium text-gray-900">
+                {{ Number(transaction.amount).toLocaleString() }}
+              </span>
+            </div>
+            <div class="text-sm text-gray-600">
+              {{
+                new Date(transaction.paymentDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })
+              }}
+            </div>
           </div>
         </div>
       </div>

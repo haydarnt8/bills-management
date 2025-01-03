@@ -7,7 +7,7 @@ const model = defineModel()
     v-if="model"
     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
   >
-    <div class="bg-white rounded-lg p-6 relative max-w-2xl w-full mx-4">
+    <div class="bg-white rounded-lg relative max-w-2xl w-full mx-4">
       <button
         @click="model = false"
         class="absolute -top-3 -right-3 bg-red-500 text-white rounded-full p-2 hover:bg-red-600"

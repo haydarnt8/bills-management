@@ -18,8 +18,10 @@ const emit = defineEmits(['add'])
 const props = defineProps<Props>()
 const { totalItems, statistics } = toRefs(props)
 const router = useRouter()
+const confirmDialog = ref(false)
 
 function logout() {
+  confirmDialog.value = false
   AuthStorageUtils.logout()
 }
 </script>
@@ -50,7 +52,7 @@ function logout() {
           <span class="hidden md:block">Add Bill</span>
         </button>
         <button
-          @click="logout"
+          @click="confirmDialog = true"
           class="flex min-w-fit items center gap-2 px-3 py-2 text-white bg-red-500 rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white"
         >
           <svg
@@ -94,5 +96,11 @@ function logout() {
         <b>{{ statistics.pending }}</b>
       </div>
     </div>
+    <BaseConfirmDialog
+      v-model="confirmDialog"
+      title="Logout"
+      message="Are you sure you want to logout?"
+      @confirm="(v) => v && logout()"
+    />
   </div>
 </template>

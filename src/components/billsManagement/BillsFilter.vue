@@ -3,6 +3,7 @@ import type { BillsFilterType } from '@/models/bills'
 
 const model = defineModel<BillsFilterType>({
   default: {
+    billNumber: '',
     paidStatus: '',
     billStatus: '',
     receivingStation: '',
@@ -16,7 +17,23 @@ const model = defineModel<BillsFilterType>({
 
 <template>
   <div class="grid gap-4">
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="form-group">
+        <BaseTextField
+          v-model="model.billNumber"
+          name="BillNumber"
+          label="Bill Number"
+          type="text"
+        />
+      </div>
+      <div class="form-group">
+        <BaseTextField
+          v-model="model.receivingStation"
+          name="ReceivingStation"
+          label="Receiving Station"
+          type="text"
+        />
+      </div>
       <div class="form-group">
         <BaseTextField
           v-model="model.paidStatus"
@@ -40,14 +57,6 @@ const model = defineModel<BillsFilterType>({
             { value: 'pending', label: 'Pending' },
             { value: 'executed', label: 'Executed' },
           ]"
-        />
-      </div>
-      <div class="form-group col-span-2 md:col-span-1">
-        <BaseTextField
-          v-model="model.receivingStation"
-          name="ReceivingStation"
-          label="Receiving Station"
-          type="text"
         />
       </div>
     </div>

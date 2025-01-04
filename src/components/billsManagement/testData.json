@@ -1,0 +1,617 @@
+[
+  {
+    "billNumber": "test-1",
+    "receiver": "Jane Doe",
+    "amount": "3000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2025-01-07",
+    "executionDate": "2025-01-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "1000", "paymentDate": "2025-01-13" },
+      { "amount": "1000", "paymentDate": "2025-01-09" }
+    ],
+    "id": 1
+  },
+  {
+    "billNumber": "test-2",
+    "receiver": "John Doe",
+    "amount": "4000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2025-02-07",
+    "executionDate": "2025-02-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "2000", "paymentDate": "2025-02-13" },
+      { "amount": "2000", "paymentDate": "2025-02-09" }
+    ],
+    "id": 2
+  },
+  {
+    "billNumber": "test-3",
+    "receiver": "Alice Smith",
+    "amount": "5000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2025-03-07",
+    "executionDate": "2025-03-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "2500", "paymentDate": "2025-03-13" },
+      { "amount": "2500", "paymentDate": "2025-03-09" }
+    ],
+    "id": 3
+  },
+  {
+    "billNumber": "test-4",
+    "receiver": "Bob Johnson",
+    "amount": "6000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2025-04-07",
+    "executionDate": "2025-04-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "3000", "paymentDate": "2025-04-13" },
+      { "amount": "3000", "paymentDate": "2025-04-09" }
+    ],
+    "id": 4
+  },
+  {
+    "billNumber": "test-5",
+    "receiver": "Charlie Brown",
+    "amount": "7000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2025-05-07",
+    "executionDate": "2025-05-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "3500", "paymentDate": "2025-05-13" },
+      { "amount": "3500", "paymentDate": "2025-05-09" }
+    ],
+    "id": 5
+  },
+  {
+    "billNumber": "test-6",
+    "receiver": "David Wilson",
+    "amount": "8000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2025-06-07",
+    "executionDate": "2025-06-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "4000", "paymentDate": "2025-06-13" },
+      { "amount": "4000", "paymentDate": "2025-06-09" }
+    ],
+    "id": 6
+  },
+  {
+    "billNumber": "test-7",
+    "receiver": "Eve Davis",
+    "amount": "9000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2025-07-07",
+    "executionDate": "2025-07-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "4500", "paymentDate": "2025-07-13" },
+      { "amount": "4500", "paymentDate": "2025-07-09" }
+    ],
+    "id": 7
+  },
+  {
+    "billNumber": "test-8",
+    "receiver": "Frank Miller",
+    "amount": "10000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2025-08-07",
+    "executionDate": "2025-08-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "5000", "paymentDate": "2025-08-13" },
+      { "amount": "5000", "paymentDate": "2025-08-09" }
+    ],
+    "id": 8
+  },
+  {
+    "billNumber": "test-9",
+    "receiver": "Grace Lee",
+    "amount": "11000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2025-09-07",
+    "executionDate": "2025-09-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "5500", "paymentDate": "2025-09-13" },
+      { "amount": "5500", "paymentDate": "2025-09-09" }
+    ],
+    "id": 9
+  },
+  {
+    "billNumber": "test-10",
+    "receiver": "Henry Clark",
+    "amount": "12000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2025-10-07",
+    "executionDate": "2025-10-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "6000", "paymentDate": "2025-10-13" },
+      { "amount": "6000", "paymentDate": "2025-10-09" }
+    ],
+    "id": 10
+  },
+  {
+    "billNumber": "test-11",
+    "receiver": "Ivy Lewis",
+    "amount": "13000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2025-11-07",
+    "executionDate": "2025-11-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "6500", "paymentDate": "2025-11-13" },
+      { "amount": "6500", "paymentDate": "2025-11-09" }
+    ],
+    "id": 11
+  },
+  {
+    "billNumber": "test-12",
+    "receiver": "Jack Walker",
+    "amount": "14000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2025-12-07",
+    "executionDate": "2025-12-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "7000", "paymentDate": "2025-12-13" },
+      { "amount": "7000", "paymentDate": "2025-12-09" }
+    ],
+    "id": 12
+  },
+  {
+    "billNumber": "test-13",
+    "receiver": "Karen Hall",
+    "amount": "15000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2026-01-07",
+    "executionDate": "2026-01-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "7500", "paymentDate": "2026-01-13" },
+      { "amount": "7500", "paymentDate": "2026-01-09" }
+    ],
+    "id": 13
+  },
+  {
+    "billNumber": "test-14",
+    "receiver": "Leo Young",
+    "amount": "16000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2026-02-07",
+    "executionDate": "2026-02-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "8000", "paymentDate": "2026-02-13" },
+      { "amount": "8000", "paymentDate": "2026-02-09" }
+    ],
+    "id": 14
+  },
+  {
+    "billNumber": "test-15",
+    "receiver": "Mia King",
+    "amount": "17000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2026-03-07",
+    "executionDate": "2026-03-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "8500", "paymentDate": "2026-03-13" },
+      { "amount": "8500", "paymentDate": "2026-03-09" }
+    ],
+    "id": 15
+  },
+  {
+    "billNumber": "test-16",
+    "receiver": "Noah Wright",
+    "amount": "18000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2026-04-07",
+    "executionDate": "2026-04-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "9000", "paymentDate": "2026-04-13" },
+      { "amount": "9000", "paymentDate": "2026-04-09" }
+    ],
+    "id": 16
+  },
+  {
+    "billNumber": "test-17",
+    "receiver": "Olivia Scott",
+    "amount": "19000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2026-05-07",
+    "executionDate": "2026-05-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "9500", "paymentDate": "2026-05-13" },
+      { "amount": "9500", "paymentDate": "2026-05-09" }
+    ],
+    "id": 17
+  },
+  {
+    "billNumber": "test-18",
+    "receiver": "Paul Green",
+    "amount": "20000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2026-06-07",
+    "executionDate": "2026-06-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "10000", "paymentDate": "2026-06-13" },
+      { "amount": "10000", "paymentDate": "2026-06-09" }
+    ],
+    "id": 18
+  },
+  {
+    "billNumber": "test-19",
+    "receiver": "Quinn Adams",
+    "amount": "21000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2026-07-07",
+    "executionDate": "2026-07-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "10500", "paymentDate": "2026-07-13" },
+      { "amount": "10500", "paymentDate": "2026-07-09" }
+    ],
+    "id": 19
+  },
+  {
+    "billNumber": "test-20",
+    "receiver": "Ryan Baker",
+    "amount": "22000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2026-08-07",
+    "executionDate": "2026-08-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "11000", "paymentDate": "2026-08-13" },
+      { "amount": "11000", "paymentDate": "2026-08-09" }
+    ],
+    "id": 20
+  },
+  {
+    "billNumber": "test-21",
+    "receiver": "Sophia Carter",
+    "amount": "23000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2026-09-07",
+    "executionDate": "2026-09-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "11500", "paymentDate": "2026-09-13" },
+      { "amount": "11500", "paymentDate": "2026-09-09" }
+    ],
+    "id": 21
+  },
+  {
+    "billNumber": "test-22",
+    "receiver": "Thomas Evans",
+    "amount": "24000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2026-10-07",
+    "executionDate": "2026-10-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "12000", "paymentDate": "2026-10-13" },
+      { "amount": "12000", "paymentDate": "2026-10-09" }
+    ],
+    "id": 22
+  },
+  {
+    "billNumber": "test-23",
+    "receiver": "Uma Foster",
+    "amount": "25000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2026-11-07",
+    "executionDate": "2026-11-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "12500", "paymentDate": "2026-11-13" },
+      { "amount": "12500", "paymentDate": "2026-11-09" }
+    ],
+    "id": 23
+  },
+  {
+    "billNumber": "test-24",
+    "receiver": "Victor Garcia",
+    "amount": "26000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2026-12-07",
+    "executionDate": "2026-12-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "13000", "paymentDate": "2026-12-13" },
+      { "amount": "13000", "paymentDate": "2026-12-09" }
+    ],
+    "id": 24
+  },
+  {
+    "billNumber": "test-25",
+    "receiver": "Wendy Harris",
+    "amount": "27000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2027-01-07",
+    "executionDate": "2027-01-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "13500", "paymentDate": "2027-01-13" },
+      { "amount": "13500", "paymentDate": "2027-01-09" }
+    ],
+    "id": 25
+  },
+  {
+    "billNumber": "test-26",
+    "receiver": "Xander Hughes",
+    "amount": "28000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2027-02-07",
+    "executionDate": "2027-02-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "14000", "paymentDate": "2027-02-13" },
+      { "amount": "14000", "paymentDate": "2027-02-09" }
+    ],
+    "id": 26
+  },
+  {
+    "billNumber": "test-27",
+    "receiver": "Yara Jenkins",
+    "amount": "29000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2027-03-07",
+    "executionDate": "2027-03-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "14500", "paymentDate": "2027-03-13" },
+      { "amount": "14500", "paymentDate": "2027-03-09" }
+    ],
+    "id": 27
+  },
+  {
+    "billNumber": "test-28",
+    "receiver": "Zane Kelly",
+    "amount": "30000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2027-04-07",
+    "executionDate": "2027-04-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "15000", "paymentDate": "2027-04-13" },
+      { "amount": "15000", "paymentDate": "2027-04-09" }
+    ],
+    "id": 28
+  },
+  {
+    "billNumber": "test-29",
+    "receiver": "Amy Lopez",
+    "amount": "31000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2027-05-07",
+    "executionDate": "2027-05-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "15500", "paymentDate": "2027-05-13" },
+      { "amount": "15500", "paymentDate": "2027-05-09" }
+    ],
+    "id": 29
+  },
+  {
+    "billNumber": "test-30",
+    "receiver": "Brian Martinez",
+    "amount": "32000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2027-06-07",
+    "executionDate": "2027-06-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "16000", "paymentDate": "2027-06-13" },
+      { "amount": "16000", "paymentDate": "2027-06-09" }
+    ],
+    "id": 30
+  },
+  {
+    "billNumber": "test-31",
+    "receiver": "Chloe Nelson",
+    "amount": "33000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2027-07-07",
+    "executionDate": "2027-07-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "16500", "paymentDate": "2027-07-13" },
+      { "amount": "16500", "paymentDate": "2027-07-09" }
+    ],
+    "id": 31
+  },
+  {
+    "billNumber": "test-32",
+    "receiver": "Daniel Ortiz",
+    "amount": "34000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2027-08-07",
+    "executionDate": "2027-08-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "17000", "paymentDate": "2027-08-13" },
+      { "amount": "17000", "paymentDate": "2027-08-09" }
+    ],
+    "id": 32
+  },
+  {
+    "billNumber": "test-33",
+    "receiver": "Ella Perez",
+    "amount": "35000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2027-09-07",
+    "executionDate": "2027-09-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "17500", "paymentDate": "2027-09-13" },
+      { "amount": "17500", "paymentDate": "2027-09-09" }
+    ],
+    "id": 33
+  },
+  {
+    "billNumber": "test-34",
+    "receiver": "Finn Ramirez",
+    "amount": "36000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2027-10-07",
+    "executionDate": "2027-10-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "18000", "paymentDate": "2027-10-13" },
+      { "amount": "18000", "paymentDate": "2027-10-09" }
+    ],
+    "id": 34
+  },
+  {
+    "billNumber": "test-35",
+    "receiver": "Gina Rivera",
+    "amount": "37000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2027-11-07",
+    "executionDate": "2027-11-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "18500", "paymentDate": "2027-11-13" },
+      { "amount": "18500", "paymentDate": "2027-11-09" }
+    ],
+    "id": 35
+  },
+  {
+    "billNumber": "test-36",
+    "receiver": "Hank Sanchez",
+    "amount": "38000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2027-12-07",
+    "executionDate": "2027-12-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "19000", "paymentDate": "2027-12-13" },
+      { "amount": "19000", "paymentDate": "2027-12-09" }
+    ],
+    "id": 36
+  },
+  {
+    "billNumber": "test-37",
+    "receiver": "Ivy Taylor",
+    "amount": "39000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2028-01-07",
+    "executionDate": "2028-01-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "19500", "paymentDate": "2028-01-13" },
+      { "amount": "19500", "paymentDate": "2028-01-09" }
+    ],
+    "id": 37
+  },
+  {
+    "billNumber": "test-38",
+    "receiver": "Jackie Thomas",
+    "amount": "40000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2028-02-07",
+    "executionDate": "2028-02-07",
+    "receivingStation": "Station A",
+    "transactions": [
+      { "amount": "20000", "paymentDate": "2028-02-13" },
+      { "amount": "20000", "paymentDate": "2028-02-09" }
+    ],
+    "id": 38
+  },
+  {
+    "billNumber": "test-39",
+    "receiver": "Kevin White",
+    "amount": "41000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2028-03-07",
+    "executionDate": "2028-03-07",
+    "receivingStation": "Station B",
+    "transactions": [
+      { "amount": "20500", "paymentDate": "2028-03-13" },
+      { "amount": "20500", "paymentDate": "2028-03-09" }
+    ],
+    "id": 39
+  },
+  {
+    "billNumber": "test-40",
+    "receiver": "Laura Young",
+    "amount": "42000",
+    "paidStatus": "unpaid",
+    "billStatus": "executed",
+    "issuingDate": "2028-04-07",
+    "executionDate": "2028-04-07",
+    "receivingStation": "Station C",
+    "transactions": [
+      { "amount": "21000", "paymentDate": "2028-04-13" },
+      { "amount": "21000", "paymentDate": "2028-04-09" }
+    ],
+    "id": 40
+  },
+  {
+    "billNumber": "test-41",
+    "receiver": "Mike Zimmerman",
+    "amount": "43000",
+    "paidStatus": "paid",
+    "billStatus": "pending",
+    "issuingDate": "2028-05-07",
+    "executionDate": "2028-05-07",
+    "receivingStation": "Station D",
+    "transactions": [
+      { "amount": "21500", "paymentDate": "2028-05-13" },
+      { "amount": "21500", "paymentDate": "2028-05-09" }
+    ],
+    "id": 41
+  }
+]

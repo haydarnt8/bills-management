@@ -15,11 +15,15 @@ if (!localStorage.getItem(STORAGE_KEY)) {
 }
 
 mock.onPost('/api/login').reply((config) => {
-  const { email, password } = JSON.parse(config.data)
-  if (email === 'user@example.com' && password === 'password') {
-    return [200, { token: 'mock-jwt-token' }]
+  try {
+    const { email, password } = JSON.parse(config.data)
+    if (email === 'user@example.com' && password === 'password') {
+      return [200, { token: 'mock-jwt-token' }]
+    }
+    return [401, { message: 'Invalid credentials' }]
+  } catch (error) {
+    return [500, { error: 'Internal server error' }]
   }
-  return [401, { message: 'Invalid credentials' }]
 })
 
 // Helper function to safely parse JSON with error handling
@@ -108,7 +112,7 @@ mock.onGet('/api/bills').reply((config) => {
     // Calculate totals with safe number conversion
     const response = {
       items: paginatedBills,
-      totalCount: bills.length,
+      totalCount: filteredBills.length,
       totalPaidAmount: bills.reduce(
         (sum, bill) => (bill.paidStatus === 'paid' ? sum + (Number(bill.amount) || 0) : sum),
         0,
@@ -211,6 +215,7 @@ mock.onPut(/\/api\/bills\/\d+/).reply((config) => {
 })
 
 mock.onDelete(/\/api\/bills\/\d+/).reply((config) => {
+  const toastStore = useToastStore()
   try {
     const bills = safeJsonParse(localStorage.getItem(STORAGE_KEY), [])
     const id = parseInt(config.url.split('/').pop())
@@ -226,6 +231,11 @@ mock.onDelete(/\/api\/bills\/\d+/).reply((config) => {
 
     bills.splice(index, 1)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(bills))
+
+    toastStore.addToast({
+      message: 'Bill deleted successfully',
+      type: 'success',
+    })
 
     return [200, { message: 'Bill deleted successfully' }]
   } catch (error) {
